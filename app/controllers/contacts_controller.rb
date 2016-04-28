@@ -4,13 +4,25 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(params[:contact])
-    @contact.request = request
-    if @contact.deliver
-      flash.now[:notice] = 'Thank you for your message. We will contact you soon!'
+    @contact = Contact.new(contact_params)
+    
+    if @contact.save
+      name = params[:contact][:name]
+      email = params[:contact][:email]
+      body = params[:contact][:comments]
+    
+      ContactMailer.contact_email(name, email, body).deliver
+    
+      flash[:success] = 'Message sent. We will contact you shortly!'
+      redirect_to new_contact_path
     else
-      flash.now[:error] = 'Cannot send message.'
-      render :new
+      flash[:danger] = 'Error occured. Name and Email cannot be empty.'
+      redirect_to new_contact_path
     end
   end
-end
+  
+  private
+    def contact_params
+      params.require(:contact).permit(:name, :email, :comments)
+    end
+  end
