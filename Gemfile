@@ -7,8 +7,7 @@ gem 'rails', '4.2.5'
 gem 'sqlite3',group:[:development, :test]
 #use the postgresql as the database for production
 
-#use bootstrap library for style
-gem 'bootstrap-sass','3.3.6'
+#
 group:production do
   gem 'pg'
   gem 'rails_12factor'
@@ -21,6 +20,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
+#use bootstrap library for style
+gem 'bootstrap-sass','3.3.6'
+
+#use font awesome library for icon
+gem 'font-awesome-sass', '4.5.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
