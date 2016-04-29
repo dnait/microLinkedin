@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   match '/contacts',     to: 'contacts#new',  via: 'get'
   resources "contacts", only: [:new, :create]
+  resources "users" 
   get '/about' => 'pages#about'
   root 'pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
